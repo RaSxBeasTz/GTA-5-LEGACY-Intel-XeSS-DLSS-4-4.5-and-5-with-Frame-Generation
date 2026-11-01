@@ -1,0 +1,2 @@
+from pathlib import Path
+p=Path('B25DepthHelper/B140aDirectPresentSharedOpen.cpp');s=p.read_text();needle='    out<<"B551: RESOURCE_OWNERSHIP';s=s.replace(needle,'    AcquireSRWLockShared(&g_b173hJobLock);const auto replacedPendingCount=g_b174ReplacedPending.size();ReleaseSRWLockShared(&g_b173hJobLock);\n'+needle);s=s.replace('<<", replaced_pending="<<g_b174ReplacedPending.size()<<", capture_busy="','<<", replaced_pending="<<replacedPendingCount<<", capture_busy="');p.write_text(s)

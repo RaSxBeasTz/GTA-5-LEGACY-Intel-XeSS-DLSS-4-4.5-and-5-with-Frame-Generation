@@ -1,0 +1,9 @@
+# R616 throughput accounting
+
+Investigation of R615 20261020-074201 log: observed4338 frames in71.844s, processed3060, reported drops1279 (in-flight/toggle boundary explains one-frame accounting offset). Output170.244/s. Queue-full/resource-owned/capture-failed counters all0. Most drops grouped under other, matching newer_completed_frame_ready from latest-completed scheduling. CPU prep ~0.2-0.4ms, XeLL sleep~0.06-0.12ms, XeFG Present~22-24ms. These imply ~43 processed FPS. Removing intentional supersession would accumulate stale frames without fixing the measured service rate.
+
+R616 adds diagnostic-only counters: superseded_completed, superseded_after_sleep, capture_admission_drops, successful Present call count/mean CPU wall time, processed/source/pending. Emitted as R616 FRAME_THROUGHPUT alongside existing telemetry (no new per-frame file writes). Resets each activation. This separates newer-completed selection from post-sleep provisional replacement and before-capture admission; they were previously mixed into other/fast_other or not individually exposed. No scheduler, interpolation, queue, camera, motion/depth, source cap or one-frame default changes. No FPS gain claimed.
+
+Reviewed SDK HIGH_RES_MV flag as a possible integration correction: installed3.0.2 header explicitly marks it deprecated/no effect, despite older wording in bundled guide. Did not change it or ship a no-op optimization. Prior GPU trace and R612 input experiment remain evidence, not proof of unavoidable hardware limitation.
+
+Release build passes existing C4244 warnings. Four installed runtime hashes verified; protected ghosting/freezing and INI unchanged. Backup pre-R616-* includes Restore.ps1. No extra gameplay comparison required: normal F9 play captures these counters in the next log. Further optimization needs to reduce actual XeFG processing/presentation service time; increasing retained queue alone is not justified.

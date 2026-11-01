@@ -1,0 +1,26 @@
+Zink Visual Mod integration - R651
+
+fxReloader
+Copyright (C) 2026 CoreFX (crxhvrd@proton.me)
+Source: https://github.com/crxhvrd/fxReloader
+Pinned source commit: 063ac3042f22f976a764f0f7aa8092bf7a00290b
+Licence: GNU General Public License version 3
+The complete corresponding source used for this build is supplied as
+fxReloader-source-063ac3.zip. The licence is supplied as
+fxReloader-GPL-3.0.txt.
+
+NaturalVision Evolved
+Copyright belongs to Razed Mods and the NaturalVision Evolved creators.
+NVE content is not redistributed in the Zink package. The app uses the
+user-supplied Single Player package and verifies its SHA-256 before installing
+the three main OIV parts into an isolated mods folder. The optional NVE
+DLSS/DLAA/FSR plug-in is deliberately excluded.
+
+RageOpenV
+Copyright belongs to Chiheb-Bacha and contributors.
+Source: https://github.com/Chiheb-Bacha/RageOpenV
+Licence: GNU General Public License version 3.
+The binary is downloaded by the user from its official GTA5-Mods release and
+is not redistributed by Zink.
+
+Use visual/gameplay modifications in GTA V Story Mode only.

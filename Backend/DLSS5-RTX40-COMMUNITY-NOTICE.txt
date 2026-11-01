@@ -1,0 +1,14 @@
+Experimental RTX 40 neural-rendering runtime
+
+File: nvngx_dlssnr_rtx40.dll
+Upstream release: https://github.com/RankFTW/rhi-repo/releases/tag/dlssnr-310.8.0-RTX40
+Release label: 310.8.0-RTX40
+Archive SHA-256: 46124CFAEF532AD5F6DA07494772EA8C1B3E719F934E254385697F38D1289E3F
+DLL SHA-256: 4B8D19BC3EFF58A084F5ECA7489C921501C203450169FB82FF4F649A4482BA05
+
+This is a community-modified NVIDIA runtime retargeted for Ada / RTX 40
+hardware. Its embedded NVIDIA Authenticode signature does not validate after
+the community modification. It is not official NVIDIA RTX 40 support and is
+loaded only when DLSS5RTX40Experimental is explicitly enabled. The original
+RTX 50 runtime remains separate and unchanged. If initialization or evaluation
+fails, Zink disables only Neural Rendering and continues through ordinary DLSS.

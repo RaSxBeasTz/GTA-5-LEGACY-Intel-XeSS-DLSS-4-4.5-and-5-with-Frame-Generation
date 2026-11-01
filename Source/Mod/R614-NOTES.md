@@ -1,0 +1,11 @@
+# R614 one/two/one native render-ahead comparison
+
+R613 completed with no errors/history resets during measured phases. Original queue3:57.7 source/188.1 output FPS; queue1:91.6/167.0; restored3:65.5/189.1. Queue-age p95 fell from about55ms to25ms. User confirms middle queue1 phase smoother. Scene variation between original/restored requires further controlled comparison rather than assuming fixed FPS gains.
+
+R614 F8 compares x4_native_queue_one, x4_native_queue_two, x4_native_queue_one_repeat; each settles3seconds and measures12seconds. Purpose: test whether2 recovers FG output while preserving smoother source delivery. Full inputs and x4 throughout, reduced inputs disabled, no source cap or protected camera/shader/freezing changes. First/last source ranges retained for ArtifactFrames percentile analysis.
+
+RenderAheadScope now permits changing target without replacing the original saved game setting. Driver readback verifies1/2/1; completion/F8/F9/focus/timeout restores exact original setting (normally3), not automatically1. Normal gameplay outside comparison still uses original game setting. Failed restores retain original for retry and are reported. R613 boolean exports retained for shutdown/backward compatibility; new B614SetNativeQueue(0/1/2), B614GetNativeQueue use numeric target acknowledgement.
+
+Validation: regression checks original3 survives1->2->1->restore3, nondefault5 and already1 preserved, duplicate enable, getter failures and failed restore retry. Production comparison tests cover three labels, acknowledgement, cancellation during queue2, F9/focus/timeout restoration, invalid generation and failed change. Arc A770 real native DXGI3->1->2->1->3 passed; existing colour/motion shader checks pass. Release build succeeds with existing C4244 warnings. Four matching runtime files installed and hash verified. INI/freezing preserved; rollback backup pre-R614-* contains Restore.ps1. Gameplay validation pending.
+
+Test: restart GTA, F9, settle camera, F8, same scene about60seconds. Send newest Comparison CSV, ArtifactFrames CSV and ScriptHook log. Note whether middle two-frame phase stays as smooth as first/last one-frame phases. This comparison does not yet make a queue setting permanent.

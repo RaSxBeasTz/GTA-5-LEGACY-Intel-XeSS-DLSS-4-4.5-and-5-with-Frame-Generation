@@ -1,0 +1,7 @@
+ // B558: omit only the unused capture-motion pass when native colour bypasses XeSS.
+ bool needsCaptureMotion=true;
+ if(g_b173iColorPoolReady.load(std::memory_order_acquire)&&g_b173iColorSlots[slotIndex].shared){
+  D3D11_TEXTURE2D_DESC captureColorTransport{};g_b173iColorSlots[slotIndex].shared->GetDesc(&captureColorTransport);
+  needsCaptureMotion=NeedsCaptureMotion(g_b173iColorSlots[slotIndex].sourceDesc,captureColorTransport);
+ }
+ if(needsCaptureMotion){

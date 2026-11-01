@@ -1,0 +1,15 @@
+Zink GTA Complete — R639
+
+Run ZinkGTAUI.exe in this folder, then use Load GTA + mod.
+Keep the entire folder together. Backend contains the bundled native mod and Intel/NVIDIA runtimes.
+
+Source/App: editable WinUI app source, including the startup capability-check fix.
+Source/Mod: editable native mod source, shaders, projects and protected-fix source lock.
+Game loader: the existing ScriptHookV.dll and dinput8.dll from this GTA installation. These are already installed in your game; they are supplied here for completeness. Only use compatible loaders for your GTA V Legacy version.
+
+This is a runnable copy for this Windows PC; it uses the installed .NET 8 Desktop Runtime and Windows App Runtime 1.8. It does not include GTA itself, graphics drivers, or runtime installers for a different PC.
+Settings/profiles remain in LocalAppData/ZinkGTAUI and the configured GTA directory. No game files or settings were changed to create this folder.
+
+Source snapshots exclude generated build outputs, recordings, captures, logs and backups. Rebuilding requires Visual Studio C++/.NET tools and the SDK paths referenced by the projects/build scripts. The supplied EXE/DLLs are already compiled.
+
+R639 is the latest installed candidate; the persistent motion-blur issue is not yet confirmed fixed.

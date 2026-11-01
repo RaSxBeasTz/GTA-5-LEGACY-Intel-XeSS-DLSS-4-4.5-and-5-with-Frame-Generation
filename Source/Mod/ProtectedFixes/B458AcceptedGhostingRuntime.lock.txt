@@ -1,0 +1,6 @@
+ // B458: B437 is the final authority for camera validity. Capture the exact tuple only after
+ // this final mathematical gate succeeds. If a later candidate fails, keep the frame unsafe/zero-motion
+ // but use the last B437-valid inverse/view/projection as the stable reconstruction basis.
+ static float b458LastValidatedVp[16]{},b458LastValidatedInvVp[16]{},b458LastValidatedView[16]{},b458LastValidatedProjection[16]{};static bool b458HaveValidatedCamera=false;static unsigned long long b458ValidatedFrame=0;
+ if(b437MotionCameraValid){std::memcpy(b458LastValidatedVp,b437ValidatedCurrentVp,64);std::memcpy(b458LastValidatedInvVp,currentInverseViewProjection,64);std::memcpy(b458LastValidatedView,currentView,64);std::memcpy(b458LastValidatedProjection,currentProjection,64);b458HaveValidatedCamera=true;b458ValidatedFrame=g_b172GtaFrame;}
+ const float*b458EffectiveInvVp=(!b437MotionCameraValid&&b458HaveValidatedCamera)?b458LastValidatedInvVp:currentInverseViewProjection;const float*b458EffectiveView=(!b437MotionCameraValid&&b458HaveValidatedCamera)?b458LastValidatedView:currentView;const float*b458EffectiveProjection=(!b437MotionCameraValid&&b458HaveValidatedCamera)?b458LastValidatedProjection:currentProjection;

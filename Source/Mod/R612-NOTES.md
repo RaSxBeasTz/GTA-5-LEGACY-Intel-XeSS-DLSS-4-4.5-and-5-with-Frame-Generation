@@ -1,0 +1,15 @@
+# R612 x4 low-resolution input comparison
+
+R611 is user-confirmed ghosting-free. Its valid comparison measured x4 46.3 source / 152.7 output FPS and FG queue interval 23.34ms. Worker logs show preparation about 0.24ms and XeLL sleep about 0.10ms while XeFG Present can consume 20-30ms. Present dominates, but the interval mixes GPU progress and driver/presentation scheduling; it is not an exclusive NN/shader timer.
+
+The installed official XeSS 3.0.2 SDK guide doc/xess_fg_developer_guide_english.md, Motion Vectors section, recommends low-resolution vectors and warns full-resolution vectors can greatly reduce performance. Low-resolution vectors are undilated and depth matches motion dimensions. Existing initialization already uses default low-resolution-MV mode (HIGH_RES_MV not set).
+
+Adds an experimental half-width/half-height motion/depth path only during F8 middle phase. Colour, backbuffer, native capture resolution, x4 count, camera selection, temporal alignment/cuts, XeLL lifecycle and queues remain. New shader reads native packed depth at each low-resolution pixel centre, uses the protected double-precision clip-to-previous transform, and writes current-to-previous low-grid pixel vectors plus undilated depth. The SDK handles low-resolution upsampling/dilation. Matching motion/depth tags use actual texture sizes. Full-resolution existing B549 path remains unchanged.
+
+Each ring slot preallocates separate reduced output textures and On12 wrappers; the existing slot/final-use retirement rules retain these resources until GPU completion. No per-frame allocations or shader compilation. Switching input modes requests one fresh history seed. Normal operation defaults to full inputs; comparison completion/F8/F9/focus/timeout clears reduced request and restores x4. No protected source or lock changes from R611.
+
+F8 runs x4_full_inputs, x4_half_inputs, x4_full_inputs_repeat: each waits for worker acknowledgement/visibility, settles 3s, measures 12s. This is a speed/quality experiment, not a claimed improvement. Returning to the baseline checks scene drift. Reset-dominated samples remain invalid and terminate explicitly. In-game artifacts and real speedup still require user validation.
+
+Validation: Release stage passes with existing C4244 warnings. Actual GPU regression on Intel Arc A770 passes production reduced D3D12/On12 allocation including odd dimensions; shader tests verify full-size depth sampled at half-grid centres (non-centre pixels deliberately zero), forward/reverse motion units/sign, stationary scenes and undilated foreground edges. Existing B548 exact colour and B549 foreground dilation tests pass. Production comparison tests pass full/half/full phases, worker acknowledgement, restoration/cancellation/timeout and invalid generation rejection. Installed runtime SHA256 verified; ghosting DLL, INI and freezing remain R611. Rollback under backups/pre-R612-*.
+
+Run GTA, F9, settle in normal gameplay, F8, remain in same scene for about 60 seconds. Send newest Comparison CSV and ScriptHook log. Report whether the middle phase introduces ghosting/jitter. Full-resolution colour is retained in every phase.

@@ -1,0 +1,248 @@
+﻿<Window x:Class="ZinkGTAUI.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="Zink - GTA V Enhancement">
+
+ <Window.SystemBackdrop><MicaBackdrop Kind="BaseAlt"/></Window.SystemBackdrop>
+ <Grid x:Name="Root" RequestedTheme="Dark" KeyDown="Root_KeyDown">
+  <Grid.Background><ImageBrush ImageSource="Assets/banner.png" Stretch="UniformToFill" Opacity="0.32" AlignmentX="Center" AlignmentY="Center"/></Grid.Background>
+
+  <Grid.RowDefinitions><RowDefinition Height="48"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+  <Grid.Resources>
+
+   <Style x:Key="Nav" TargetType="Button"><Setter Property="HorizontalAlignment" Value="Stretch"/><Setter Property="HorizontalContentAlignment" Value="Left"/><Setter Property="Height" Value="48"/><Setter Property="Padding" Value="14,0"/><Setter Property="Background" Value="Transparent"/><Setter Property="BorderBrush" Value="Transparent"/><Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="10"/><Setter Property="FontSize" Value="15"/></Style>
+
+   <Style x:Key="Card" TargetType="Border"><Setter Property="Background"><Setter.Value><AcrylicBrush TintColor="#111827" TintOpacity="0.62" TintLuminosityOpacity="0.72" FallbackColor="#172033"/></Setter.Value></Setter><Setter Property="BorderBrush" Value="#32FFFFFF"/><Setter Property="BorderThickness" Value="1"/><Setter Property="CornerRadius" Value="16"/><Setter Property="Padding" Value="22"/><Setter Property="Shadow"><Setter.Value><ThemeShadow/></Setter.Value></Setter></Style>
+
+   <Style x:Key="FluentButton" TargetType="Button"><Setter Property="CornerRadius" Value="12"/><Setter Property="Padding" Value="19,12"/><Setter Property="MinHeight" Value="46"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="BorderBrush" Value="#58FFFFFF"/><Setter Property="BorderThickness" Value="1"/><Setter Property="Background"><Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#B0354867" Offset="0"/><GradientStop Color="#8A172338" Offset="0.55"/><GradientStop Color="#A0243150" Offset="1"/></LinearGradientBrush></Setter.Value></Setter><Setter Property="Shadow"><Setter.Value><ThemeShadow/></Setter.Value></Setter></Style>
+
+   <Style x:Key="ProviderCardButton" TargetType="Button"><Setter Property="HorizontalAlignment" Value="Stretch"/><Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="MinHeight" Value="166"/><Setter Property="Padding" Value="24"/><Setter Property="CornerRadius" Value="18"/><Setter Property="BorderThickness" Value="1"/><Setter Property="Background"><Setter.Value><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#AF263A5A" Offset="0"/><GradientStop Color="#86121C2C" Offset="0.58"/><GradientStop Color="#A72A3145" Offset="1"/></LinearGradientBrush></Setter.Value></Setter><Setter Property="Shadow"><Setter.Value><ThemeShadow/></Setter.Value></Setter></Style>
+
+  </Grid.Resources>
+
+  <Grid x:Name="AppTitleBar" Margin="18,0,144,0" Background="Transparent"><StackPanel Orientation="Horizontal" Spacing="11" VerticalAlignment="Center"><Border Width="28" Height="28" CornerRadius="7" Background="#243B82F6"><Image Source="Assets/Zink.ico" Width="22" Height="22" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border><TextBlock Text="Zink" FontSize="16" FontWeight="SemiBold"/><TextBlock Text="GTA V Enhancement" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/></StackPanel></Grid>
+
+  <Border Grid.Row="1" Margin="14,2,14,14" BorderBrush="#62FFFFFF" BorderThickness="1" CornerRadius="24"><Border.Background><AcrylicBrush TintColor="#0B1220" TintOpacity="0.42" TintLuminosityOpacity="0.62" FallbackColor="#101827"/></Border.Background><Border.Shadow><ThemeShadow/></Border.Shadow>
+
+   <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="218"/><ColumnDefinition Width="*"/><ColumnDefinition Width="340"/></Grid.ColumnDefinitions>
+
+    <Border CornerRadius="24,0,0,24" Padding="18,26" BorderBrush="#28FFFFFF" BorderThickness="0,0,1,0"><Border.Background><AcrylicBrush TintColor="#07101F" TintOpacity="0.66" TintLuminosityOpacity="0.65" FallbackColor="#0B1423"/></Border.Background>
+
+     <Grid><Grid.RowDefinitions><RowDefinition Height="120"/><RowDefinition/><RowDefinition Height="160"/></Grid.RowDefinitions>
+
+      <StackPanel Spacing="4"><TextBlock Text="ZINK" FontSize="34" CharacterSpacing="90" Foreground="{ThemeResource TextFillColorPrimaryBrush}" FontWeight="SemiBold"/><TextBlock Text="GTA V ENHANCEMENT" FontSize="11" CharacterSpacing="110" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/></StackPanel>
+
+      <StackPanel x:Name="NavItems" Grid.Row="1" Spacing="4">
+
+       <Button Style="{StaticResource Nav}" Tag="Home" Click="Navigate_Click" Background="#18FFFFFF"><StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE80F;" FontSize="17"/><TextBlock Text="Home" VerticalAlignment="Center"/></StackPanel></Button>
+
+       <Button Style="{StaticResource Nav}" Tag="Graphics" Click="Navigate_Click"><StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE7F4;" FontSize="17"/><TextBlock Text="Graphics" VerticalAlignment="Center"/></StackPanel></Button>
+
+       <Button Style="{StaticResource Nav}" Tag="Upscaling" Click="Navigate_Click"><StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE740;" FontSize="17"/><TextBlock Text="Upscaling" VerticalAlignment="Center"/></StackPanel></Button>
+
+       <Button Style="{StaticResource Nav}" Tag="Frame Generation" Click="Navigate_Click"><StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE768;" FontSize="17"/><TextBlock Text="Frame Generation" VerticalAlignment="Center"/></StackPanel></Button>
+
+       <Button Style="{StaticResource Nav}" Tag="Advanced" Click="Navigate_Click"><StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE713;" FontSize="17"/><TextBlock Text="Advanced" VerticalAlignment="Center"/></StackPanel></Button>
+
+       <Button Style="{StaticResource Nav}" Tag="Hotkeys" Click="Navigate_Click"><StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE765;" FontSize="17"/><TextBlock Text="Hotkeys" VerticalAlignment="Center"/></StackPanel></Button>
+
+       <Button Style="{StaticResource Nav}" Tag="Profiles" Click="Navigate_Click"><StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE77B;" FontSize="17"/><TextBlock Text="Profiles" VerticalAlignment="Center"/></StackPanel></Button>
+
+       <Button Style="{StaticResource Nav}" Tag="About" Click="Navigate_Click"><StackPanel Orientation="Horizontal" Spacing="12"><FontIcon Glyph="&#xE946;" FontSize="17"/><TextBlock Text="About" VerticalAlignment="Center"/></StackPanel></Button>
+
+      </StackPanel>
+
+      <StackPanel Grid.Row="2" VerticalAlignment="Bottom" Spacing="6"><TextBlock Text="GTA V LEGACY" FontWeight="Bold"/><TextBlock x:Name="AboutVersionText" Text="App 2.9.0 · Mod R649" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/><TextBlock x:Name="BuildIdentityText" Text="Build information loading…" FontSize="11" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextWrapping="Wrap"/><TextBlock x:Name="SidebarStatus" Text="Checking installation…" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/></StackPanel>
+
+     </Grid>
+
+    </Border>
+
+    <ScrollViewer x:Name="ContentScroll" Grid.Column="1" Padding="24" Margin="0,0,0,96" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" Background="Transparent">
+
+     <StackPanel Spacing="18">
+
+      <TextBlock x:Name="PageTitle" Text="Overview" FontSize="34" FontWeight="SemiBold"/>
+
+      <TextBlock Text="Your graphics, in one place. Choose a provider, tune your settings and launch GTA." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+
+      <InfoBar x:Name="MessageBar" IsOpen="False" IsClosable="True"/>
+
+      <Border Height="190" CornerRadius="16" BorderBrush="#38FFFFFF" BorderThickness="1"><Border.Background><ImageBrush ImageSource="Assets/banner.png" Stretch="UniformToFill"/></Border.Background><Border.Shadow><ThemeShadow/></Border.Shadow></Border>
+
+      <Border x:Name="ProviderSection" Style="{StaticResource Card}"><StackPanel Spacing="14">
+
+       <TextBlock Text="Choose your graphics" FontSize="24" FontWeight="SemiBold"/>
+
+       <TextBlock Text="One app. Your choice of Intel XeSS or NVIDIA RTX." Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+
+       <Grid ColumnSpacing="14"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+
+        <Button x:Name="IntelProviderButton" Grid.Column="1" Style="{StaticResource ProviderCardButton}" BorderBrush="#6679B8FF" Tag="Intel" Click="Provider_Click"><StackPanel Spacing="10"><Image Source="Assets/intel-logo.svg" Width="92" Height="38" Stretch="Uniform" HorizontalAlignment="Left"/><TextBlock Text="Intel XeSS" FontSize="27" FontWeight="SemiBold" Foreground="#82B6FF"/><TextBlock Text="XeSS Frame Generation · 4×" TextWrapping="Wrap"/><TextBlock Text="Native colour · XeLL low latency" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/></StackPanel></Button>
+
+        <Button x:Name="NvidiaProviderButton" Style="{StaticResource ProviderCardButton}" BorderBrush="#668FCF88" Tag="NVIDIA" Click="Provider_Click"><StackPanel Spacing="10"><Image Source="Assets/nvidia-logo.svg" Width="46" Height="38" Stretch="Uniform" HorizontalAlignment="Left"/><TextBlock Text="NVIDIA RTX" FontSize="27" FontWeight="SemiBold" Foreground="#A5E05B"/><TextBlock Text="DLSS · Frame Generation · Reflex" TextWrapping="Wrap"/><TextBlock Text="RTX 40: 2× · RTX 50: 2× / 4× / 6×" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/></StackPanel></Button>
+
+       </Grid>
+
+       <TextBlock x:Name="ProviderStatus" Text="Selected: Intel XeSS" FontWeight="SemiBold"/>
+
+       <ComboBox x:Name="GpuChoice" Header="Rendering GPU" HorizontalAlignment="Stretch" SelectionChanged="GpuChoice_SelectionChanged"/>
+       <TextBlock Text="Automatic is recommended. A manual choice writes GTA's adapter index and is remembered separately for Intel and NVIDIA." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" FontSize="12"/>
+
+       <TextBlock x:Name="NvidiaCapabilityText" Text="Checking NVIDIA driver capabilities…" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+
+       <Border Background="#24101824" BorderBrush="#30FFFFFF" BorderThickness="1" CornerRadius="12" Padding="14"><StackPanel Spacing="8"><Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock Text="Provider readiness scan" FontWeight="SemiBold"/><Button Grid.Column="1" Content="Scan again" Click="RescanProvider_Click" Style="{StaticResource FluentButton}" Padding="12,6"/></Grid><TextBlock x:Name="ProviderScanText" Text="Select Intel or NVIDIA to scan this PC, GTA and the required runtime." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/></StackPanel></Border>
+
+      </StackPanel></Border>
+
+      <Border x:Name="GraphicsSection" Style="{StaticResource Card}"><StackPanel Spacing="12">
+
+       <TextBlock Text="Graphics · output resolution" FontSize="20" FontWeight="SemiBold"/>
+
+       <ComboBox x:Name="ResolutionChoice" Header="Output resolution" HorizontalAlignment="Stretch" SelectedIndex="0"><ComboBoxItem Content="1080p · 1920 × 1080" Tag="1080P"/><ComboBoxItem Content="1440p · 2560 × 1440" Tag="1440P"/><ComboBoxItem Content="4K · 3840 × 2160" Tag="4K"/></ComboBox>
+
+       <TextBlock Text="Quality mode determines GTA’s render resolution; the mod reconstructs to this output size. Load GTA applies the saved settings and activates the mod automatically." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+
+        <ToggleSwitch x:Name="VisualEnhancementToggle" Header="Enable NaturalVision Evolved graphics overhaul" IsOn="False"/>
+
+        <TextBlock Text="Uses the downloaded NaturalVision Evolved Legacy package. The app verifies it, installs all three main OIV parts into an isolated mods folder, configures the loader, and can revert them automatically. NVE's optional DLSS/FSR plug-in is excluded to prevent conflicts. Story Mode only." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+
+      </StackPanel></Border>
+
+      <Grid ColumnSpacing="16"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+
+       <Border x:Name="UpscalingSection" Style="{StaticResource Card}"><StackPanel Spacing="12">
+
+        <TextBlock x:Name="UpscalingTitle" Text="Intel XeSS" FontSize="22" Foreground="#68A5FF" FontWeight="SemiBold"/>
+
+        <TextBlock Text="Upscaling and anti-aliasing" FontSize="17"/>
+
+        <TextBlock Text="Native keeps GTA at the output resolution. Other quality modes use a windowed game source at the SDK-recommended render size and reconstruct to the selected output resolution." TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+
+        <ComboBox x:Name="QualityChoice" Header="Upscaling quality" SelectedIndex="0" HorizontalAlignment="Stretch"><ComboBoxItem Content="Native · no upscaling" Tag="NATIVE"/><ComboBoxItem Content="Native AA · anti-aliasing" Tag="AA"/><ComboBoxItem Content="Quality" Tag="QUALITY"/><ComboBoxItem Content="Balanced" Tag="BALANCED"/><ComboBoxItem Content="Performance" Tag="PERFORMANCE"/><ComboBoxItem Content="Ultra Performance" Tag="ULTRA_PERFORMANCE"/><ComboBoxItem Content="Ultra Quality · Intel" Tag="ULTRA_QUALITY"/><ComboBoxItem Content="Ultra Quality Plus · Intel" Tag="ULTRA_QUALITY_PLUS"/></ComboBox>
+
+        <ComboBox x:Name="DlssVersionChoice" Header="NVIDIA DLSS version" SelectedIndex="1" HorizontalAlignment="Stretch"><ComboBoxItem Content="DLSS 4" Tag="4"/><ComboBoxItem Content="DLSS 4.5" Tag="4.5"/><ComboBoxItem Content="DLSS 5 · experimental" Tag="5"/></ComboBox>
+        <ToggleSwitch x:Name="Dlss5Rtx40Toggle" Header="Allow experimental DLSS 5 on RTX 40 series" IsOn="False" Toggled="Dlss5Rtx40_Toggled"/>
+        <ToggleSwitch x:Name="IntelDlss5Toggle" Header="Enable experimental DLSS 5 Neural Rendering on Intel Arc (DirectML)" IsOn="False"/>
+        <TextBlock x:Name="IntelDlss5Help" Text="Intel Arc route: XeSS remains the upscaler, then the vendor-neutral DirectML port applies the DLSS 5 neural model to the finished picture. Frame generation is disabled for this first build. Requires a restart and downloads a verified OptiScaler package." TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" Visibility="Collapsed"/>
+        <TextBlock Text="DLSS 4 uses model K. DLSS 4.5 uses model M, or L in Ultra Performance. DLSS 5 Neural Rendering is officially supported on RTX 50. The RTX 40 option enables an unsupported experimental attempt with automatic fallback to ordinary DLSS if the runtime rejects it; RTX 40 frame generation remains limited to 2×. Changing version requires restarting GTA." TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+        <ToggleSwitch Header="Sharpening · unavailable" IsOn="False" IsEnabled="False"/>
+
+        
+
+        
+
+       </StackPanel></Border>
+
+       <Border x:Name="FrameGenerationSection" Grid.Column="1" Style="{StaticResource Card}"><StackPanel Spacing="12">
+
+        <TextBlock Text="Frame generation" FontSize="20" FontWeight="SemiBold"/>
+
+        <ToggleSwitch x:Name="FrameGenerationToggle" Header="Allow Intel XeSS FG" IsOn="False"/>
+
+        <ComboBox x:Name="MultiplierChoice" Header="Multiplier" SelectedIndex="1" HorizontalAlignment="Stretch" IsEnabled="False"><ComboBoxItem Content="2× · 1 generated frame" Tag="2"/><ComboBoxItem Content="4× · 3 generated frames" Tag="4"/><ComboBoxItem Content="6× · 5 generated frames" Tag="6"/></ComboBox>
+
+        <TextBlock Text="F9 toggles the mod. Upscaling can run with FG disabled. Intel uses XeLL; NVIDIA uses Reflex. Available modes depend on your GPU and driver." TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+
+        <ToggleSwitch x:Name="IntelArcToggle" Header="Require Intel Arc GPU" IsOn="True"/>
+
+        <TextBlock Text="This checks GTA’s rendering GPU; it does not switch GPUs or monitor connections." TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"/>
+
+       </StackPanel></Border>
+
+      </Grid>
+
+      <Border x:Name="AdvancedSection" Style="{StaticResource Card}"><StackPanel Spacing="12">
+
+       <TextBlock Text="HUD and diagnostics" FontSize="20" FontWeight="SemiBold"/>
+
+       <Grid ColumnSpacing="16"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+
+        <StackPanel Spacing="10"><ToggleSwitch x:Name="HudToggle" Header="In-game performance HUD" IsOn="True"/><ToggleSwitch x:Name="FpsToggle" Header="Show FPS" IsOn="True"/><ToggleSwitch x:Name="FrameTimesToggle" Header="Show frame intervals" ToolTipService.ToolTip="Average intervals calculated from the rolling FPS counters."/></StackPanel>
+
+        <StackPanel Grid.Column="1" Spacing="10"><ToggleSwitch x:Name="UsageToggle" Header="Show CPU / GPU / VRAM" IsOn="True"/><ToggleSwitch x:Name="StatusToggle" Header="Show FG status / runtime" IsOn="True"/><ToggleSwitch x:Name="DiagnosticsToggle" Header="Write diagnostic logs" IsOn="True"/></StackPanel>
+
+       </Grid>
+
+       <ComboBox x:Name="SourceFpsChoice" Header="Optional base-game FPS limit" SelectedIndex="0" HorizontalAlignment="Stretch"><ComboBoxItem Content="Uncapped" Tag="0"/><ComboBoxItem Content="30 FPS" Tag="30"/><ComboBoxItem Content="60 FPS" Tag="60"/><ComboBoxItem Content="90 FPS" Tag="90"/><ComboBoxItem Content="120 FPS" Tag="120"/></ComboBox>
+
+       <ToggleSwitch x:Name="AutoApplyToggle" Header="Apply changes automatically" IsOn="True"/>
+
+      </StackPanel></Border>
+
+      <Border x:Name="InstallSection" Style="{StaticResource Card}"><StackPanel Spacing="12">
+
+       <TextBlock Text="Game installation" FontSize="20" FontWeight="SemiBold"/>
+
+       <ToggleSwitch x:Name="ModEnabledToggle" Header="Enable and automatically load the mod with GTA" IsOn="True"/>
+
+       <TextBox x:Name="GamePathBox" Header="GTA V Legacy folder" PlaceholderText="Folder containing GTA5.exe"/>
+
+       <TextBox x:Name="GameSettingsBox" Header="GTA settings.xml"/>
+
+       <StackPanel Orientation="Horizontal" Spacing="10"><Button Content="Browse game" Click="BrowseGame_Click" Style="{StaticResource FluentButton}"/><Button Content="Browse settings" Click="BrowseSettings_Click" Style="{StaticResource FluentButton}"/><Button x:Name="InstallButton" Content="Install / update mod" Click="Install_Click" Style="{StaticResource FluentButton}"/><Button x:Name="RestoreButton" Content="Restore GTA folder" Click="Restore_Click" Style="{StaticResource FluentButton}"/></StackPanel>
+
+       <TextBlock Text="Backups are created before changes. HUD, FPS limit, FG and NVIDIA multiplier update live. Resolution, provider and upscaling changes require the next game launch. Close GTA before updating runtime files." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+
+      </StackPanel></Border>
+
+      <Border x:Name="ProfilesSection" Style="{StaticResource Card}"><StackPanel Spacing="12">
+
+       <TextBlock Text="Profiles" FontSize="20" FontWeight="SemiBold"/>
+
+       <ComboBox x:Name="ProfileChoice" Header="Saved profile" HorizontalAlignment="Stretch" SelectionChanged="ProfileChoice_SelectionChanged"/>
+
+       <TextBox x:Name="ProfileNameBox" Header="Profile name" Text="Default"/>
+
+       <StackPanel Orientation="Horizontal" Spacing="10"><Button Content="Save profile" Click="SaveProfile_Click"/><Button Content="Reset to defaults" Click="Reset_Click"/><Button Content="Open backups" Click="Backups_Click"/></StackPanel>
+
+      </StackPanel></Border>
+
+
+
+     </StackPanel>
+
+    </ScrollViewer>
+
+    <Border Grid.Column="1" VerticalAlignment="Bottom" Margin="24,0,24,18" Padding="14" CornerRadius="16" BorderBrush="#38FFFFFF" BorderThickness="1"><Border.Background><AcrylicBrush TintColor="#111B2C" TintOpacity="0.86" TintLuminosityOpacity="0.74" FallbackColor="#172235"/></Border.Background><Border.Shadow><ThemeShadow/></Border.Shadow><StackPanel Orientation="Horizontal" Spacing="10"><Button Content="▶  Load GTA + mod" Click="Launch_Click" Style="{StaticResource AccentButtonStyle}" Padding="24,13" CornerRadius="10"/><Button x:Name="ApplyButton" Content="Apply settings" Click="Apply_Click" Style="{StaticResource FluentButton}"/><Button Content="Open logs" Click="Logs_Click" Style="{StaticResource FluentButton}"/></StackPanel></Border>
+    <ScrollViewer Grid.Column="2" Padding="0,24,18,24" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" Background="Transparent"><StackPanel Spacing="18">
+
+     <Border Style="{StaticResource Card}"><StackPanel Spacing="12"><TextBlock Text="System" FontSize="20" FontWeight="SemiBold"/><TextBlock x:Name="GpuInfo" Text="Reading GPUs…" Foreground="#68A5FF" TextWrapping="Wrap"/><TextBlock x:Name="CpuInfo" TextWrapping="Wrap"/><TextBlock x:Name="RamInfo"/><TextBlock x:Name="DisplayInfo" TextWrapping="Wrap"/><TextBlock x:Name="GameBuildInfo" TextWrapping="Wrap"/></StackPanel></Border>
+
+     <Border Style="{StaticResource Card}" Padding="18"><StackPanel Spacing="14">
+      <Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><StackPanel><TextBlock Text="Graphics runtime" FontSize="20" FontWeight="SemiBold"/><TextBlock Text="Verified from the active mod" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"/></StackPanel><Border Grid.Column="1" x:Name="RuntimeStateBadge" Background="#303C4658" BorderBrush="#40FFFFFF" BorderThickness="1" CornerRadius="10" Padding="10,5" VerticalAlignment="Center"><TextBlock x:Name="RuntimeStateText" Text="Checking…" FontSize="12" FontWeight="SemiBold"/></Border></Grid>
+      <Border Height="1" Background="#24FFFFFF"/>
+      <StackPanel Spacing="4"><TextBlock Text="ACTIVE PROVIDER" FontSize="11" FontWeight="SemiBold" Foreground="{ThemeResource TextFillColorSecondaryBrush}" CharacterSpacing="80"/><TextBlock x:Name="ActiveProviderText" Text="—" FontSize="20" FontWeight="SemiBold" TextWrapping="Wrap"/></StackPanel>
+      <Border Background="#24101824" BorderBrush="#28FFFFFF" BorderThickness="1" CornerRadius="10" Padding="12"><StackPanel Spacing="5"><TextBlock Text="UPSCALING" FontSize="11" FontWeight="SemiBold" Foreground="#8EBBFF"/><TextBlock x:Name="ActiveUpscalerText" Text="—" FontSize="16" FontWeight="SemiBold" TextWrapping="Wrap"/><TextBlock x:Name="UpscalerRuntimeText" Text="—" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/></StackPanel></Border>
+      <Border Background="#24142110" BorderBrush="#3494D448" BorderThickness="1" CornerRadius="10" Padding="12"><StackPanel Spacing="5"><TextBlock Text="FRAME GENERATION" FontSize="11" FontWeight="SemiBold" Foreground="#94D448"/><TextBlock x:Name="ActiveFgText" Text="—" FontSize="16" FontWeight="SemiBold" TextWrapping="Wrap"/><TextBlock x:Name="FgRuntimeText" Text="—" FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/></StackPanel></Border>
+      <Border Background="#241C1628" BorderBrush="#346B5BD2" BorderThickness="1" CornerRadius="10" Padding="12"><StackPanel Spacing="5"><TextBlock Text="NEURAL PIPELINE" FontSize="11" FontWeight="SemiBold" Foreground="#B39DFF"/><TextBlock x:Name="NeuralRuntimeText" Text="—" FontSize="14" FontWeight="SemiBold" TextWrapping="Wrap"/></StackPanel></Border>
+      <TextBlock x:Name="RuntimeEvidenceText" Text="Waiting for runtime evidence." FontSize="12" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+     </StackPanel></Border>
+
+     <Border Style="{StaticResource Card}"><StackPanel Spacing="12"><TextBlock Text="Live performance" FontSize="20" FontWeight="SemiBold"/><TextBlock x:Name="GameStatus" TextWrapping="Wrap"/><TextBlock x:Name="ModStatus" TextWrapping="Wrap"/><Grid ColumnSpacing="12"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions><StackPanel><TextBlock Text="BASE" FontSize="10" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/><TextBlock x:Name="LiveFps" Text="—" FontSize="22"/></StackPanel><StackPanel Grid.Column="1"><TextBlock Text="OUTPUT" FontSize="10" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/><TextBlock x:Name="LiveFg" Text="—" FontSize="22"/></StackPanel></Grid><TextBlock x:Name="LiveUsage" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/><TextBlock x:Name="ResolutionStatus" TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/></StackPanel></Border>
+
+     <Border Style="{StaticResource Card}"><StackPanel Spacing="10"><TextBlock Text="In-game hotkeys" FontWeight="SemiBold"/><TextBlock Text="F9  ·  Toggle mod"/><TextBlock Text="F11  ·  Mark visual artifact"/><TextBlock Text="F8  ·  Diagnostic comparison" Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/></StackPanel></Border>
+
+     <Border CornerRadius="16" BorderBrush="#38FFFFFF" BorderThickness="1" Height="300"><Border.Background><ImageBrush ImageSource="Assets/promo.png" Stretch="UniformToFill"/></Border.Background><Border.Shadow><ThemeShadow/></Border.Shadow></Border>
+
+    </StackPanel></ScrollViewer>
+
+   </Grid>
+
+  </Border>
+
+  <Border x:Name="ApplyProgressPanel" Grid.RowSpan="2" Canvas.ZIndex="100" HorizontalAlignment="Center" VerticalAlignment="Center" MinWidth="430" MaxWidth="620" Padding="32,26" CornerRadius="22" BorderBrush="#70FFFFFF" BorderThickness="1" Visibility="Collapsed" IsHitTestVisible="False">
+   <Border.Background><AcrylicBrush TintColor="#111827" TintOpacity="0.94" TintLuminosityOpacity="0.76" FallbackColor="#172033"/></Border.Background>
+   <Border.Shadow><ThemeShadow/></Border.Shadow>
+   <StackPanel Spacing="14" HorizontalAlignment="Center">
+    <ProgressRing x:Name="ApplyProgressRing" Width="48" Height="48" IsIndeterminate="True" HorizontalAlignment="Center"/>
+    <TextBlock x:Name="ApplyProgressText" Text="Applying changes to GTA and mod…" FontSize="19" FontWeight="SemiBold" HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"/>
+   </StackPanel>
+  </Border>
+
+ </Grid>
+
+</Window>
+
+
+
+
+
+

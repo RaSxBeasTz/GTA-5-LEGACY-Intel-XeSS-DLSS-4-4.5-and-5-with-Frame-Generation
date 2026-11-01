@@ -1,0 +1,15 @@
+# R613 native render-ahead timing experiment
+
+R612 reduced-input experiment gave about 2% output gain with small jitter reported; full inputs restored. R611 remains camera/ghosting baseline. Analysis of R612 visible non-reset ArtifactFrames: source interval median23.872ms/p95 43.022ms; consumed frame time median24.615/p95 44.229ms; worker input queue age median44.305/p95 63.301ms; Present median20.952/p95 30.559ms. These are source/worker timings, not actual on-screen generated-frame timing or proof of jitter mechanism.
+
+R613 tests one proposed contributor: native D3D11 driver render-ahead. F8 phases x4_native_queue_original, x4_native_queue_one, x4_native_queue_restored, each3s settle +12s measurement. Uses IDXGIDevice1 on GTA's native D3D11 device, separate from the mod's D3D12 XeFG device. Saves and verifies exact original latency; temporarily sets1, then restores original. If already1, logs make that visible and experiment is a no-change control. No source FPS cap, sleep, frame count, resolution, protected camera/temporal/freezing change. Reduced motion disabled in every phase.
+
+Scope wrapper serializes changes and readback under SRW lock; driver calls happen only at phase boundaries, not per-frame. A new experiment queries current native device to avoid retaining an obsolete device after reset. F8/F9/focus/timeout/completion requests exact restoration; worker shutdown independently retries restoration. Failed restoration retains original/active state for retry and is explicitly reported instead of completed. Hardware driver/device loss can still prevent restoration until device recreation. The game INI is untouched.
+
+CSV adds first_source_frame and last_source_frame for per-phase ArtifactFrames queue/input-gap/Present percentile analysis. FPS alone is not sufficient. Existing comparison validity rejects missing generation/reset dominated phases. Normal operation uses original native queue and full inputs. This is an experiment, not an established jitter fix or guaranteed FPS gain.
+
+Validation: production scope tests preserve original3/nondefault5/already1, repeated enable, read failure, failed restore/retry. Comparison tests cover all phases, acknowledgement, F8 cancellation during one-frame phase, F9/focus/timeout restoration, invalid sample and failed change. Actual Arc A770 native DXGI device tested3->1->3; existing GPU colour/motion tests pass. Release build/stage passes existing C4244 warnings. Protected ghosting DLL hashes remain R611. Four matching installed runtime files SHA256 verified; INI and freezing DLL preserved. Backup pre-R613-* contains Restore.ps1.
+
+Documentation: https://learn.microsoft.com/en-us/windows/win32/api/dxgi/nf-dxgi-idxgidevice1-setmaximumframelatency . This controls native device queue latency, not FPS. Multiple native swap chains sharing this device may also be affected during middle phase; only private D3D12 XeFG is known separate.
+
+Test: restart GTA, F9, let camera settle, F8, keep same scene about60seconds. Send newest Comparison CSV, ArtifactFrames and ScriptHook log. Note whether jitter changes in middle phase.

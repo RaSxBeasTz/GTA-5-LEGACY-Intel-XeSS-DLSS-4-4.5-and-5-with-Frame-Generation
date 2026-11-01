@@ -1,0 +1,8 @@
+#include "../B25DepthHelper/CompletedFramePolicy.h"
+#include <vector>
+#include <iostream>
+#include <stdexcept>
+static void check(bool v,const char*s){if(!v)throw std::runtime_error(s);}
+int main(){try{std::uint64_t fences[]{10,20,30,40};check(gta::LatestCompletedFrame(fences,4,25)==1,"newest complete selected, incomplete tail retained");check(gta::LatestCompletedFrame(fences,4,9)==gta::NoReadyFrame,"never consume incomplete input");check(gta::LatestCompletedFrame(fences,4,~std::uint64_t(0))==gta::NoReadyFrame,"removed device is not completed work");std::uint64_t zero[]{0};check(gta::LatestCompletedFrame(zero,1,100)==gta::NoReadyFrame,"missing completion never eligible");
+ std::vector<std::uint64_t>pending;std::uint64_t produced=0,completed=0,presented=0;unsigned discarded=0;for(unsigned tick=0;tick<20000;++tick){if(tick%2==0&&pending.size()<5)pending.push_back(++produced);if(tick%3==0&&completed<produced)++completed;if(tick%5==0&&!pending.empty()){auto selected=gta::LatestCompletedFrame(pending.data(),pending.size(),completed);if(selected!=gta::NoReadyFrame){for(std::size_t i=0;i<=selected;++i)check(pending[i]<=completed,"never retire GPU-incomplete prefix");check(pending[selected]>presented,"presentation IDs monotonic");presented=pending[selected];discarded+=(unsigned)selected;pending.erase(pending.begin(),pending.begin()+selected+1);}}check(pending.size()<=5,"bounded pending ownership");}
+ check(presented>1000&&discarded>0,"sustained producer/consumer simulation exercised collapse");std::cout<<"PASS:20000 asynchronous ticks, newest completed selection, future tail preserved, monotonic presentation, no unsafe retirement\n";return 0;}catch(const std::exception&e){std::cerr<<e.what()<<"\n";return 1;}}

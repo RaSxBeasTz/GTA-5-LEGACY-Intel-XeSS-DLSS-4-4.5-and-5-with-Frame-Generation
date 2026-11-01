@@ -1,0 +1,14 @@
+{
+  "ProtectedFixes/CameraRuntime.cpp": "58b0cff1281ffc0e3434e2835609a1776352a0c91c991198672fe326e1637c87",
+  "ProtectedFixes/FreezingFix.cpp": "528d8f37e0a46770bc689924bfbc2a10d2e17c01b3998678f8b6cb8e3c362448",
+  "ProtectedFixes/GhostingFix.cpp": "b525ff482750c022fb6f1f9d32c6ad8df9f9916aa1d84d24f4a40b9ce7c96c2a",
+  "ProtectedFixes/RuntimeContract.cpp": "d95de6b8fdd41b59248e3a56a5de7797108a35bddf32032c940a33dd38991310",
+  "ProtectedFixes/TemporalRuntime.cpp": "5aff951ae5853daa1de227810ab305c119ad21564e05d568c311f443b032f0b5",
+  "ProtectedFixes/CameraRuntime.h": "463cd7aef890bc1d0ee548b943628e5c50183b12c7c9dda6ddc11b3703ae3522",
+  "ProtectedFixes/TemporalRuntime.h": "67536c90131b33be709b39e85a568c75f8479285561ac12a0b64ce71caa6c7d0",
+  "ProtectedFixes/FreezingFix.vcxproj": "3fc6aedc9609468c10b711ecfbc8b2f71482ac9f5b3bcdd47c09f8aeebe302c8",
+  "ProtectedFixes/GhostingFix.vcxproj": "8d0dd603f07d37ef66e7a16422c312b32a20ce55e52372f0be7153aceefbebb5",
+  "B25DepthHelper/GhostingIntegrity.cpp": "ce8ae6c4dd76eb4be3302da2ac8902951c800da6686f0d1da2d590a33d2c3816",
+  "ProtectedFixes/CameraCapturePolicy.h": "be9b067614be5b99d501efb15024ec4a05d2d992a10cea521d6984e10168ab99",
+  "ProtectedFixes/TemporalContinuity.h": "a7410014a15e97a8ec77e4203f7edcf145b05af917f31287dd7e1c833e5b3c99"
+}

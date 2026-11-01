@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations"><ProjectConfiguration Include="Release|x64"><Configuration>Release</Configuration><Platform>x64</Platform></ProjectConfiguration></ItemGroup>
+  <PropertyGroup Label="Globals"><ProjectGuid>{11111111-2222-3333-4444-555555555551}</ProjectGuid><Keyword>Win32Proj</Keyword><WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion></PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration"><ConfigurationType>DynamicLibrary</ConfigurationType><UseDebugLibraries>false</UseDebugLibraries><PlatformToolset>v145</PlatformToolset><CharacterSet>MultiByte</CharacterSet></PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'"><OutDir>$(ProjectDir)x64\Release\</OutDir><IntDir>$(ProjectDir)x64\Release\obj\</IntDir><TargetName>GTAXeSS.GhostingFix</TargetName><XeSSRoot Condition="'$(XeSSRoot)'==''">C:\Users\Franc\Downloads\GTA MOD\XeSS\XESS\xess-main</XeSSRoot></PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'"><ClCompile><LanguageStandard>stdcpp20</LanguageStandard><WarningLevel>Level3</WarningLevel><Optimization>MaxSpeed</Optimization><RuntimeLibrary>MultiThreaded</RuntimeLibrary><PreprocessorDefinitions>GHOSTING_RUNTIME_BUILD;WIN32;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions><AdditionalIncludeDirectories>$(XeSSRoot)\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories></ClCompile><Link><SubSystem>Windows</SubSystem><AdditionalDependencies>libxess_dx11.lib;libxess_fg.lib;libxell.lib;d3d11.lib;d3d12.lib;dxgi.lib;d3dcompiler.lib;%(AdditionalDependencies)</AdditionalDependencies><AdditionalLibraryDirectories>$(XeSSRoot)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories></Link></ItemDefinitionGroup>
+  <ItemGroup><ClCompile Include="GhostingFix.cpp" /><ClCompile Include="RuntimeContract.cpp" /><ClCompile Include="CameraRuntime.cpp" /><ClCompile Include="TemporalRuntime.cpp" /></ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
