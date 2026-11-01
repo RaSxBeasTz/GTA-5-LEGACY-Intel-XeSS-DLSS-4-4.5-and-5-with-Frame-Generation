@@ -102,7 +102,9 @@ if ($game) { Status ('GTA: ' + $game) } else { Write-Warning 'GTA folder not fou
 $time = Get-Date -Format 'yyyyMMdd-HHmmss'
 $downloads = Join-Path $env:USERPROFILE 'Downloads'
 if (-not (Test-Path -LiteralPath $downloads)) { New-Item -ItemType Directory -Path $downloads -Force | Out-Null }
-$work = Join-Path ([IO.Path]::GetTempPath()) ('Zink-R658-' + [Guid]::NewGuid().ToString('N'))
+# MSVC's legacy intermediate-path limit requires both a short source root and
+# a non-TEMP output path (MSB3191/MSB8029 on Visual Studio 2026).
+$work = Join-Path $env:USERPROFILE ('ZR658-' + [Guid]::NewGuid().ToString('N').Substring(0,8))
 New-Item -ItemType Directory -Path $work -Force | Out-Null
 $buildLog = Join-Path $downloads ('Zink-R658-build-' + $time + '.log')
 $errLog = Join-Path $work 'msbuild-errors.txt'
@@ -117,6 +119,12 @@ try {
         Test-Path -LiteralPath (Join-Path $_.FullName 'Source\Mod\NvidiaRtx\NvidiaBackend.vcxproj') -PathType Leaf
     } | Select-Object -First 1
     if (-not $source) { throw 'Downloaded source archive is missing the NVIDIA native project.' }
+    # GitHub expands a very long repository/branch directory name. Move its
+    # CONTENTS to a short root before building (path length must stay < 260).
+    $shortSource = Join-Path $work 'src'
+    Move-Item -LiteralPath $source.FullName -Destination $shortSource
+    $source = Get-Item -LiteralPath $shortSource
+    Status ('Short Windows source path: ' + $source.FullName)
     $header = Join-Path $source.FullName 'Source\Mod\NvidiaRtx\NvidiaDlaa.h'
     if (-not ([IO.File]::ReadAllText($header).Contains('R658: DLSS_EVALUATE_VRAM_WARNING'))) {
         throw 'Downloaded source does not contain the R658 hotfix. No files were changed.'
