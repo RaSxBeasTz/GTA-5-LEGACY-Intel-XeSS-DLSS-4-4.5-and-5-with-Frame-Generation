@@ -307,6 +307,7 @@ public sealed partial class MainWindow : Window
 
     async void Provider_Click(object sender,RoutedEventArgs e){if(sender is Button b){CaptureGpuChoice();provider=b.Tag?.ToString()=="NVIDIA"?"NVIDIA":"Intel";QualityChoice.SelectedIndex=provider=="NVIDIA"?2:0;MultiplierChoice.SelectedIndex=provider=="Intel"?1:0;PopulateGpuChoices();UpdateProvider();await ScanProviderEnvironment(true);SettingsChanged(sender,e);}}
     async void RescanProvider_Click(object sender,RoutedEventArgs e)=>await ScanProviderEnvironment(true);
+    async void RescanGpus_Click(object sender,RoutedEventArgs e){CaptureGpuChoice();PopulateGpuChoices();LoadHardware(provider);await ScanProviderEnvironment(true);}
     void Dlss5Rtx40_Toggled(object sender,RoutedEventArgs e){if(!loading)UpdateProvider();}
 
     void UpdateProvider(){

@@ -2,6 +2,12 @@
 
 This file is the source for the app's About and release-history window. New release notes added here are copied into every build and appear in the app automatically.
 
+## App 3.2.1 / Mod R656 - 1 November 2026
+
+- Moved the Rendering GPU selector into the persistent right-side System panel so scans and automatic setting changes cannot scroll it away.
+- Kept every detected Intel and NVIDIA adapter available regardless of the active upscaling provider.
+- Added a dedicated Refresh GPU list button without requiring a provider change.
+
 ## App 3.2.0 / Mod R655 - 1 November 2026
 
 - Added background, resumable NaturalVision Evolved package downloading when the Visual Mod switch is enabled.
