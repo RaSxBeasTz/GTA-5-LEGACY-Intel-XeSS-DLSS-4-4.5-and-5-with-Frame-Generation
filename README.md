@@ -2,7 +2,7 @@
 
 Zink GTA Enhancement is a Windows 11 companion app and GTA V Legacy mod project for selecting and managing Intel XeSS or NVIDIA RTX rendering features from one Fluent UI interface.
 
-Current release: **App 3.2.1 / Mod R656**.
+Current release: **App 3.3.0 / Mod R657**.
 
 ## Download the ready-to-run app
 

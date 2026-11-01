@@ -26,6 +26,7 @@
 /Backend/*.asi
 /Backend/*.zip
 /exe/*.zip
+/exe/*-OneDrive-Bundle/
 
 # User-downloaded visual mods and local state
 NaturalVision*/

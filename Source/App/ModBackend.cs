@@ -451,9 +451,10 @@ public sealed class ModBackend
     }
 
     public async System.Threading.Tasks.Task<string> ConfigureVisualModAsync(ModSettings settings,IProgress<string>? progress=null){
+        var bundledArchive=Path.Combine(AppContext.BaseDirectory,"VisualMod","NaturalVision Evolved - Single Player Package.zip");
         var downloadedArchive=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),"Downloads","NaturalVision Evolved - Single Player Package.zip");
         var cachedArchive=Path.Combine(DataRoot,"downloads","NaturalVision Evolved - Single Player Package.zip");
-        var nveArchive=File.Exists(downloadedArchive)?downloadedArchive:cachedArchive;
+        var nveArchive=File.Exists(bundledArchive)?bundledArchive:File.Exists(downloadedArchive)?downloadedArchive:cachedArchive;
         var nveMarker=Path.Combine(settings.GameDirectory,"Zink-NVE.json");
         if(!settings.VisualEnhancement&&File.Exists(nveMarker))return await ConfigureNaturalVisionAsync(settings,nveArchive,progress);
         if(settings.VisualEnhancement&&!File.Exists(nveArchive)&&!string.IsNullOrWhiteSpace(settings.VisualModDownloadUrl)){nveArchive=await DownloadNaturalVisionAsync(settings.VisualModDownloadUrl,cachedArchive,progress);settings.VisualModDownloadUrl="";}

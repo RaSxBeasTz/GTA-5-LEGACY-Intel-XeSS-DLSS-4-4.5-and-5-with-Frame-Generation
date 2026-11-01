@@ -2,6 +2,12 @@
 
 This file is the source for the app's About and release-history window. New release notes added here are copied into every build and appear in the app automatically.
 
+## App 3.3.0 / Mod R657 - 1 November 2026
+
+- Added portable Visual Mod bundle detection at `VisualMod\NaturalVision Evolved - Single Player Package.zip` beside the app.
+- A bundled archive takes priority over Downloads and the cache, allowing one-click verification and installation without entering a URL.
+- Retained the authorised background-download field as a fallback for public packages that cannot redistribute NVE.
+
 ## App 3.2.1 / Mod R656 - 1 November 2026
 
 - Moved the Rendering GPU selector into the persistent right-side System panel so scans and automatic setting changes cannot scroll it away.

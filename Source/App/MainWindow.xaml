@@ -101,7 +101,7 @@
 
         <ToggleSwitch x:Name="VisualEnhancementToggle" Header="Enable NaturalVision Evolved graphics overhaul" IsOn="False"/>
 
-        <TextBlock Text="When enabled, the app downloads or resumes the NaturalVision Evolved Legacy package in the background, shows percentage and GB progress, verifies it, installs all three main OIV parts into an isolated mods folder, configures the loader, and can revert them automatically. NVE's optional DLSS/FSR plug-in is excluded to prevent conflicts. Story Mode only." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+        <TextBlock Text="Portable bundles automatically use VisualMod\NaturalVision Evolved - Single Player Package.zip, so no link is required. Otherwise the app can download or resume an authorised package link. Zink verifies and installs all three main OIV parts into an isolated mods folder and can revert them automatically. Story Mode only." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
 
       </StackPanel></Border>
 
