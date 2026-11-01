@@ -1,6 +1,10 @@
 # Windows app download
 
-Download **Zink-GTA-Enhancement-3.1.1-R654-Windows-x64.zip** from the repository's latest GitHub Release.
+Download the complete ready-to-run Windows package:
+
+**[Zink-GTA-Enhancement-3.1.1-R654-Windows-x64.zip](https://github.com/RaSxBeasTz/GTA-5-LEGACY-Intel-XeSS-DLSS-4-4.5-and-5-with-Frame-Generation/releases/download/v3.1.1-R654/Zink-GTA-Enhancement-3.1.1-R654-Windows-x64.zip)**
+
+The package is hosted as a GitHub Release asset because GitHub does not allow a 419 MB binary to be committed directly to the source tree.
 
 After downloading:
 
