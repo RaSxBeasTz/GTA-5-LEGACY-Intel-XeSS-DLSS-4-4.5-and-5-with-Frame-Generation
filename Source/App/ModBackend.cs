@@ -86,6 +86,8 @@ public sealed class ModSettings
 
     public bool VisualEnhancement { get; set; }
 
+    public string VisualModDownloadUrl { get; set; } = "";
+
     public (int Width, int Height) Dimensions => Resolution.ToUpperInvariant() switch
 
     {
@@ -449,8 +451,14 @@ public sealed class ModBackend
     }
 
     public async System.Threading.Tasks.Task<string> ConfigureVisualModAsync(ModSettings settings,IProgress<string>? progress=null){
-        var nveArchive=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),"Downloads","NaturalVision Evolved - Single Player Package.zip");
+        var downloadedArchive=Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),"Downloads","NaturalVision Evolved - Single Player Package.zip");
+        var cachedArchive=Path.Combine(DataRoot,"downloads","NaturalVision Evolved - Single Player Package.zip");
+        var nveArchive=File.Exists(downloadedArchive)?downloadedArchive:cachedArchive;
+        var nveMarker=Path.Combine(settings.GameDirectory,"Zink-NVE.json");
+        if(!settings.VisualEnhancement&&File.Exists(nveMarker))return await ConfigureNaturalVisionAsync(settings,nveArchive,progress);
+        if(settings.VisualEnhancement&&!File.Exists(nveArchive)&&!string.IsNullOrWhiteSpace(settings.VisualModDownloadUrl)){nveArchive=await DownloadNaturalVisionAsync(settings.VisualModDownloadUrl,cachedArchive,progress);settings.VisualModDownloadUrl="";}
         if(File.Exists(nveArchive))return await ConfigureNaturalVisionAsync(settings,nveArchive,progress);
+        if(settings.VisualEnhancement)throw new InvalidOperationException("Paste the authorised NaturalVision Evolved package link from Razed Mods / Cfx Marketplace, then turn the Visual Mod setting on.");
         EnsureClosed();
         const string visualVVersion="1.0.630";
         const string archiveHash="96E666AD5DCFB9840317E9DD15A0151C358C51FEB2A85265494B190D070A112C";
@@ -494,6 +502,21 @@ public sealed class ModBackend
             WriteFxConfig(config,true);
             return $"VisualV {visualVVersion} Legacy installed with all {expectedTimecycles.Length} Legacy timecycle files and visual settings. Active on the next GTA launch; Story Mode only.";
         }finally{try{Directory.Delete(staging,true);}catch{}}
+    }
+
+    async System.Threading.Tasks.Task<string> DownloadNaturalVisionAsync(string address,string destination,IProgress<string>? progress){
+        if(!Uri.TryCreate(address.Trim(),UriKind.Absolute,out var uri)||uri.Scheme!=Uri.UriSchemeHttps)throw new InvalidOperationException("Paste an authorised HTTPS NaturalVision Evolved package link from Razed Mods / Cfx Marketplace.");
+        Directory.CreateDirectory(Path.GetDirectoryName(destination)!);var partial=destination+".part";long existing=File.Exists(partial)?new FileInfo(partial).Length:0;
+        using var client=new HttpClient{Timeout=System.Threading.Timeout.InfiniteTimeSpan};client.DefaultRequestHeaders.UserAgent.ParseAdd("Zink-GTA-NVE-Installer/3.2");
+        using var request=new HttpRequestMessage(HttpMethod.Get,uri);if(existing>0)request.Headers.Range=new System.Net.Http.Headers.RangeHeaderValue(existing,null);
+        progress?.Report(existing>0?$"Resuming NaturalVision Evolved download at {existing/1073741824d:0.00} GB…":"Downloading NaturalVision Evolved in the background…");
+        using var response=await client.SendAsync(request,HttpCompletionOption.ResponseHeadersRead);
+        if(existing>0&&response.StatusCode!=System.Net.HttpStatusCode.PartialContent){existing=0;try{File.Delete(partial);}catch{};response.EnsureSuccessStatusCode();}else response.EnsureSuccessStatusCode();
+        var remaining=response.Content.Headers.ContentLength;var total=remaining.HasValue?existing+remaining.Value:0;long received=existing,lastReported=-1;
+        await using(var input=await response.Content.ReadAsStreamAsync())await using(var output=new FileStream(partial,existing>0?FileMode.Append:FileMode.Create,FileAccess.Write,FileShare.Read,1024*1024,true)){
+            var buffer=new byte[1024*1024];int count;while((count=await input.ReadAsync(buffer))>0){await output.WriteAsync(buffer.AsMemory(0,count));received+=count;var percent=total>0?received*100/total:-1;if(percent!=lastReported){lastReported=percent;progress?.Report(total>0?$"Downloading NaturalVision Evolved… {percent}% · {received/1073741824d:0.00} / {total/1073741824d:0.00} GB":$"Downloading NaturalVision Evolved… {received/1073741824d:0.00} GB");}}
+        }
+        progress?.Report("Download complete. Verifying the NaturalVision Evolved archive…");File.Move(partial,destination,true);return destination;
     }
 
     async System.Threading.Tasks.Task<string> ConfigureNaturalVisionAsync(ModSettings settings,string archive,IProgress<string>? progress){

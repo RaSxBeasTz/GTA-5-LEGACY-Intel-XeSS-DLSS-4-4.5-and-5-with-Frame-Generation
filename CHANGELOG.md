@@ -2,6 +2,13 @@
 
 This file is the source for the app's About and release-history window. New release notes added here are copied into every build and appear in the app automatically.
 
+## App 3.2.0 / Mod R655 - 1 November 2026
+
+- Added background, resumable NaturalVision Evolved package downloading when the Visual Mod switch is enabled.
+- Added live percentage and downloaded/total GB progress to the existing centred progress panel.
+- Added an authorised package-link field for the user-specific Razed Mods / Cfx Marketplace download.
+- Kept SHA-256 verification before installation and corrected NVE removal when the cached archive is no longer present.
+
 ## App 3.1.1 / Mod R654 - 1 November 2026
 
 - Fixed GPU selection showing duplicate Intel entries for individual Windows display paths.

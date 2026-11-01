@@ -128,7 +128,7 @@ public sealed partial class MainWindow : Window
 
         FrameGeneration=FrameGenerationToggle.IsOn,IntelArcOnly=IntelArcToggle.IsOn,IntelDlss5DirectMl=provider=="Intel"&&IntelDlss5Toggle.IsOn,Diagnostics=DiagnosticsToggle.IsOn,
 
-        Hud=HudToggle.IsOn,ShowFPS=FpsToggle.IsOn,ShowFrameTimes=FrameTimesToggle.IsOn,ShowUsage=UsageToggle.IsOn,ShowStatus=StatusToggle.IsOn,AutoApply=AutoApplyToggle.IsOn,VisualEnhancement=VisualEnhancementToggle.IsOn
+        Hud=HudToggle.IsOn,ShowFPS=FpsToggle.IsOn,ShowFrameTimes=FrameTimesToggle.IsOn,ShowUsage=UsageToggle.IsOn,ShowStatus=StatusToggle.IsOn,AutoApply=AutoApplyToggle.IsOn,VisualEnhancement=VisualEnhancementToggle.IsOn,VisualModDownloadUrl=VisualModDownloadUrlBox.Text.Trim()
 
     };
 
@@ -144,7 +144,7 @@ public sealed partial class MainWindow : Window
 
         FrameGenerationToggle.IsOn=s.FrameGeneration;IntelArcToggle.IsOn=s.IntelArcOnly;IntelDlss5Toggle.IsOn=s.IntelDlss5DirectMl;DiagnosticsToggle.IsOn=s.Diagnostics;ModEnabledToggle.IsOn=s.AutoStartMod;
 
-        HudToggle.IsOn=s.Hud;FpsToggle.IsOn=s.ShowFPS;FrameTimesToggle.IsOn=s.ShowFrameTimes;UsageToggle.IsOn=s.ShowUsage;StatusToggle.IsOn=s.ShowStatus;AutoApplyToggle.IsOn=s.AutoApply;VisualEnhancementToggle.IsOn=s.VisualEnhancement;
+        HudToggle.IsOn=s.Hud;FpsToggle.IsOn=s.ShowFPS;FrameTimesToggle.IsOn=s.ShowFrameTimes;UsageToggle.IsOn=s.ShowUsage;StatusToggle.IsOn=s.ShowStatus;AutoApplyToggle.IsOn=s.AutoApply;VisualEnhancementToggle.IsOn=s.VisualEnhancement;VisualModDownloadUrlBox.Text=s.VisualModDownloadUrl;
 
     }
 

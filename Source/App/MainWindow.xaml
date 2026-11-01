@@ -100,9 +100,11 @@
 
        <TextBlock Text="Quality mode determines GTA’s render resolution; the mod reconstructs to this output size. Load GTA applies the saved settings and activates the mod automatically." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
 
+        <TextBox x:Name="VisualModDownloadUrlBox" Header="Authorised NVE package link" PlaceholderText="Paste the HTTPS download link supplied by Razed Mods / Cfx Marketplace" HorizontalAlignment="Stretch"/>
+
         <ToggleSwitch x:Name="VisualEnhancementToggle" Header="Enable NaturalVision Evolved graphics overhaul" IsOn="False"/>
 
-        <TextBlock Text="Uses the downloaded NaturalVision Evolved Legacy package. The app verifies it, installs all three main OIV parts into an isolated mods folder, configures the loader, and can revert them automatically. NVE's optional DLSS/FSR plug-in is excluded to prevent conflicts. Story Mode only." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+        <TextBlock Text="When enabled, the app downloads or resumes the NaturalVision Evolved Legacy package in the background, shows percentage and GB progress, verifies it, installs all three main OIV parts into an isolated mods folder, configures the loader, and can revert them automatically. NVE's optional DLSS/FSR plug-in is excluded to prevent conflicts. Story Mode only." Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
 
       </StackPanel></Border>
 
