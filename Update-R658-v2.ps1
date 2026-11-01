@@ -1,5 +1,5 @@
 # Zink GTA Enhancement R658 — one-command NVIDIA native fix updater.
-# Run from Windows PowerShell: irm 'https://raw.githubusercontent.com/RaSxBeasTz/GTA-5-LEGACY-Intel-XeSS-DLSS-4-4.5-and-5-with-Frame-Generation/fix/r658-nvidia-vram-warning-startup/Update-R658.ps1' | iex
+# Run from Windows PowerShell: irm 'https://raw.githubusercontent.com/RaSxBeasTz/GTA-5-LEGACY-Intel-XeSS-DLSS-4-4.5-and-5-with-Frame-Generation/fix/r658-nvidia-vram-warning-startup/Update-R658-v2.ps1' | iex
 # Requires installed Visual Studio C++ build tools + Windows SDK. Downloads the
 # exact R658 source and pinned third-party SDK headers/import libs when missing.
 # Only installs a rebuilt NVIDIA RTX.dll and updates the app bundle manifest.
